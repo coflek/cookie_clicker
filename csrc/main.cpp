@@ -1,29 +1,9 @@
-#include "base64.h"
 #include <iostream>
-#include <stdint.h>
+#include "cookie_save.h"
 
 int main() {
-	std::string cookie_save = "Mnx8MTQyMzMzNTYxNzY0MTsxNDIzMzM1NjE3NzA4OzE0NTYyNjgzNDUyMjg7UG93ZXIgVGVhcG90fMOnwr3CoAZ8NTYxNi40MzY2NjY2NjE2ODg7NTY5Mi40MzY2NjY2NjE2Mjk7ODU7MDs4NTszMTswOzA7MDswOzA7MDswOzA7MDswOzA7MDswOzA7MDswOzswOzA7MDswOzA7MDswOy0xOy0xOy0xOy0xOy0xOzA7MDswOzA7NTA7fDQsNCw1NjA3LDA7MCwwLDAsMDswLDAsMCwwOzAsMCwwLDA7MCwwLDAsMDswLDAsMCwwOzAsMCwwLDA7MCwwLDAsMDswLDAsMCwwOzAsMCwwLDA7MCwwLDAsMDswLDAsMCwwOzAsMCwwLDA7MCwwLDAsMDt8w6bCoMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAw6TCgMKAQHzDp8KAwoDDpMKAwoDDpMKDwoDDpMKAwoDDpMKAwoDDpcKAwoDDpMKAwoDDpMKAwoDDpMKAwoDDpMKAwoDDpMKAwoDDpMKAwoDDpMKAwoDDpMKAwoDDpMKAwoDDpMKAwoDDpMKAwoDDpMKAwoDDoMKgwoA % 3D % 21END % 21";
-	
-	/* prepare save for decoding  - remove % 21END % 21 from the end, replace " % 3D" with = */
-	const std::string SAVE_END = " % 21END % 21";
-	const std::string EQUALS = " % 3D";
-	uint32_t save_end_index = cookie_save.find(SAVE_END);
-	cookie_save = cookie_save.replace(save_end_index, save_end_index + SAVE_END.length(), "");
-	uint32_t equals_index = cookie_save.find(EQUALS);
-	while (equals_index != std::string::npos) {
-		cookie_save = cookie_save.replace(equals_index, equals_index + EQUALS.length(), "=");
-		equals_index = cookie_save.find(EQUALS);
-	}
-	
-	std::cout << cookie_save << std::endl;
-
-	char* decoded = new char[cookie_save.length() * 3 / 4 + 1];
-	std::fill(decoded, decoded + cookie_save.length() * 3 / 4 + 1, 0);
-	base64_decode(cookie_save, decoded);
-	std::cout << decoded << std::endl;
-	std::cout << std::endl;
-
-	delete[] decoded;
+	std::string cookie_save = "Mnx8MTQ1NTIxMjgyNzE4NDsxNDU1MjEyODI3MTkyOzE0NTY0MTkwNzM1NjM7Q29mbGVrfMOlwrnCoAR8MTU4NDE4MjQ1MjYxMTUuMzM7MzU5NTMwMDQ5NDE0OTI1MDQ7MjUxMzsyOTQ7MzQ1MjYyODMzMzAyNzcyOTs0NjI5OzA7MDswOzE7MDswOzcxOzQ0MzQzOzA7Mjk0OzM4NDY1Nzc5ODYyOTQwLjczNDs3OzA7MDstMTswOzswOzA7MDswOzA7MDswOy0xOy0xOy0xOy0xOy0xOzA7MDswOzA7MDt8MjAwLDIwMCwxMjA5NTY4NjgyNzEyMjYzLDA7MTg1LDE4NSwzMjc0MzM2NjI2MDgwNywwOzE1MCwxNTQsMjY0NzYxODI4MzgzLDA7MTUwLDE1MCw5ODg3NDc4MzAwMDEsMDsxMDAsMTAwLDM2ODY0NDEwODEyNjUsMDsxMDAsMTAwLDExODU0MDAyNzYwMTA1LDA7MTAwLDEwMCw0ODQwNTE4NzIzNDIzMiwwOzEwMCwxMDAsMTMyMDE2NDUyMTE3NzUxLDA7NjAsNjAsMzcyOTE5MDU0MDIzMzY0LDA7NTEsNTEsMTExNjYxODI3OTMyMzI5MSwwOzM1LDM1LDM5MDY2MTk0NjQwNTA4NDAsMDsyNiwyNiw3OTUxNDUxMzA0MDI5OTU3LDA7MTUsMTUsODM1MDE3NjE4MDYxNjkxOCwwOzQsNCw0MDQ5ODAyNTg2ODIyMTgzLDA7fMOnwr/Cv8Onwr/Cv8Onwr/Cv8Onwr/Cv8OnwrvCv8Onwr/Cv8Onwr/Cv8OmwoPCv8Onwr/Cv8Onwr/Cv8OnwoDCj8OnwrPCvMOkwozCv8OkwrDCgMOkwrjCi8Onwr7Cj8OnwrDCgMOnwoDCgMOkwoDCgMOkwoDCgMOkwoDCgMOkwoLCoMOkwoDCgMOkwoDCgMOkwr/CgMOmwoDCgMOkwoDCgMOkwrvCs8OkwoDCgMOkwoDCgMOkwoDCgMOkwoDCgMOkwoDCgMOkwr/CvMOnwr/Cs8Onwr7Cj8OnwoDCqsOmwoDCgMOkwoDCgMOkwoDCgMOkwoDCgMOkwoDCgMOkwoDCgMOkwoDCgMOkwoDCgMOkwoDCgMOkwoDCgMOkwoDCgMOkwoDCgMOkwoDCgMOkwoDCgMOkwoDCgMOkwoDCgMOkwoDCgMOkwoDCgMOkwoDCgEB8w6fCv8Kww6TCv8K8w6TCv8K7w6fCv8K9w6bCpMKnw6XCvcKFw6TCksKAw6TCs8KAw6TClMKEw6TCg8KAw6TChsKAw6TCgMKAw6TCvMK5w6fCgMKAw6TCgMKgw6TCgMKAw6TCgcKgw6TChMKAw6DCoMKA%21END%21";
+	Cookie::CookieSave cs;
+	cs.Load(cookie_save);
 	return 0;
 }
